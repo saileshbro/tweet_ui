@@ -60,6 +60,9 @@ class Tweet {
   /// The number of favorites(hearts)
   int favoriteCount;
 
+  /// The number of retweets
+  int retweetCount;
+
   /// Nullable. List of two unicode code point indices, identifying the inclusive start and exclusive end of the displayable content of the Tweet.
   List<int> displayTextRange;
 
@@ -77,23 +80,22 @@ class Tweet {
     this.favorited,
     this.favoriteCount,
     this.displayTextRange,
+    this.retweetCount,
   });
 
   factory Tweet.fromRawJson(String str) => Tweet.fromJson(json.decode(str));
 
-  factory Tweet.fromJson(Map<String, dynamic> json) => new Tweet(
-        createdAt: json["created_at"] == null ? null : json["created_at"],
+  factory Tweet.fromJson(Map<String, dynamic> json) => Tweet(
+        createdAt: json["created_at"],
         id: json["id"] == null ? null : json["id"].toDouble(),
-        idStr: json["id_str"] == null ? null : json["id_str"],
+        idStr: json["id_str"],
         quotedStatus: json["quoted_status"] == null
             ? null
             : Tweet.fromJson(json["quoted_status"]),
         retweetedStatus: json["retweeted_status"] == null
             ? null
             : Tweet.fromJson(json["retweeted_status"]),
-        text: json["text"] == null
-            ? (json["full_text"] == null ? null : json["full_text"])
-            : json["text"],
+        text: json["text"] ?? (json["full_text"]),
         entities: json["entities"] == null
             ? null
             : TweetEntities.fromJson(json["entities"]),
@@ -101,11 +103,12 @@ class Tweet {
             ? null
             : TweetEntities.fromJson(json["extended_entities"]),
         user: json["user"] == null ? null : User.fromJson(json["user"]),
-        isQuoteStatus:
-            json["is_quote_status"] == null ? null : json["is_quote_status"],
-        favorited: json["favorited"] == null ? null : json["favorited"],
+        isQuoteStatus: json["is_quote_status"],
+        favorited: json["favorited"],
         favoriteCount:
             json['favorite_count'] == null ? null : json["favorite_count"],
+        retweetCount:
+            json['retweet_count'] == null ? null : json["retweet_count"],
         displayTextRange: json["display_text_range"] == null
             ? null
             : (json["display_text_range"]).cast<int>(),

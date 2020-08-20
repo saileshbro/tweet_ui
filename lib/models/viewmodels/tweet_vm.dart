@@ -17,7 +17,7 @@ class TweetVM {
   final bool hasPhoto;
   final bool hasGif;
   final String tweetLink;
-  final String userLink;
+  // final String userLink;
   final String text;
   final Runes textRunes;
   final String profileUrl;
@@ -31,6 +31,7 @@ class TweetVM {
   final String videoUrl;
   final double videoAspectRatio;
   final int favoriteCount;
+  final int retweetsCount;
   final int startDisplayText;
   final int endDisplayText;
 
@@ -41,7 +42,7 @@ class TweetVM {
     this.hasPhoto,
     this.hasGif,
     this.tweetLink,
-    this.userLink,
+    // this.userLink,
     this.text,
     this.textRunes,
     this.profileUrl,
@@ -57,18 +58,19 @@ class TweetVM {
     this.favoriteCount,
     this.startDisplayText,
     this.endDisplayText,
+    this.retweetsCount,
   });
 
   factory TweetVM.fromApiModel(
           Tweet tweet, DateFormat createdDateDisplayFormat) =>
-      new TweetVM(
+      TweetVM(
         createdAt: _createdAt(tweet, createdDateDisplayFormat),
         hasSupportedVideo: _hasSupportedVideo(tweet),
         allEntities: _allEntities(tweet),
         hasPhoto: _hasPhoto(tweet),
         hasGif: _hasGif(tweet),
         tweetLink: _tweetLink(tweet),
-        userLink: _userLink(tweet),
+        // userLink: _userLink(tweet),
         text: _text(tweet),
         textRunes: _runes(tweet),
         profileUrl: _profileURL(tweet),
@@ -83,15 +85,16 @@ class TweetVM {
         videoUrl: _videoUrl(tweet),
         videoAspectRatio: _videoAspectRatio(tweet),
         favoriteCount: _favoriteCount(tweet),
+        retweetsCount: _retweetsCount(tweet),
         startDisplayText: _startDisplayText(tweet),
         endDisplayText: _endDisplayText(tweet),
       );
 
   static String _createdAt(Tweet tweet, DateFormat displayFormat) {
-    DateFormat twitterFormat =
-        new DateFormat("EEE MMM dd HH:mm:ss '+0000' yyyy", 'en_US');
+    final DateFormat twitterFormat =
+        DateFormat("EEE MMM dd HH:mm:ss '+0000' yyyy", 'en_US');
     final dateTime = twitterFormat.parseUTC(tweet.createdAt).toLocal();
-    return (displayFormat ?? new DateFormat("HH:mm • MM.dd.yyyy", 'en_US'))
+    return (displayFormat ?? DateFormat("HH:mm • MM.dd.yyyy", 'en_US'))
         .format(dateTime);
   }
 
@@ -161,7 +164,7 @@ class TweetVM {
     return allEntities;
   }
 
-//
+  //
   static MediaEntity _photoEntity(Tweet tweet) {
     final List<MediaEntity> mediaEntityList = _allMediaEntities(tweet);
     for (int i = mediaEntityList.length - 1; i >= 0; i--) {
@@ -200,17 +203,6 @@ class TweetVM {
       return "$_TWITTER_URL$_UNKNOWN_SCREEN_NAME/status/${tweet.idStr}";
     } else {
       return "$_TWITTER_URL${tweet.user.screenName}/status/${tweet.idStr}";
-    }
-  }
-
-  static String _userLink(Tweet tweet) {
-    if (tweet.id <= 0) {
-      return null;
-    }
-    if (tweet.user.screenName.isEmpty) {
-      return "$_TWITTER_URL$_UNKNOWN_SCREEN_NAME";
-    } else {
-      return "$_TWITTER_URL${tweet.user.screenName}";
     }
   }
 
@@ -273,7 +265,7 @@ class TweetVM {
   }
 
   static double _videoAspectRatio(Tweet tweet) {
-    VideoInfo videoInfo = _videoEntity(tweet)?.videoInfo;
+    final VideoInfo videoInfo = _videoEntity(tweet)?.videoInfo;
     if (videoInfo != null) {
       return videoInfo?.aspectRatio[0] / videoInfo?.aspectRatio[1];
     } else {
@@ -283,6 +275,10 @@ class TweetVM {
 
   static int _favoriteCount(Tweet tweet) {
     return tweet.favoriteCount;
+  }
+
+  static int _retweetsCount(Tweet tweet) {
+    return tweet.retweetCount;
   }
 
   static int _startDisplayText(Tweet tweet) {
@@ -298,7 +294,7 @@ class TweetVM {
 
 extension ExtendedText on TweetVM {
   TweetVM getDisplayTweet() {
-    if (this.retweetedTweet != null) {
+    if (retweetedTweet != null) {
       return retweetedTweet;
     } else {
       return this;

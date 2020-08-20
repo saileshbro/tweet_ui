@@ -19,8 +19,10 @@ class QuoteTweetView extends StatelessWidget {
   final Color borderColor;
   final Color backgroundColor;
   final OnTapImage onTapImage;
-
-  QuoteTweetView(
+  final Function(String username) onUsernamePressed;
+  final Function(String hashtag) onHashtagPressed;
+  final Function(String url) onUrlPressed;
+  const QuoteTweetView(
     this.tweetVM, {
     this.userNameStyle,
     this.userScreenNameStyle,
@@ -29,9 +31,12 @@ class QuoteTweetView extends StatelessWidget {
     this.borderColor,
     this.backgroundColor,
     this.onTapImage,
+    @required this.onUsernamePressed,
+    @required this.onHashtagPressed,
+    @required this.onUrlPressed,
   }); //  TweetView(this.tweetVM);
 
-  QuoteTweetView.fromTweet(
+  const QuoteTweetView.fromTweet(
     this.tweetVM, {
     this.userNameStyle,
     this.userScreenNameStyle,
@@ -40,6 +45,9 @@ class QuoteTweetView extends StatelessWidget {
     this.borderColor,
     this.backgroundColor,
     this.onTapImage,
+    @required this.onUsernamePressed,
+    @required this.onHashtagPressed,
+    @required this.onUrlPressed,
   });
 
   @override
@@ -49,19 +57,17 @@ class QuoteTweetView extends StatelessWidget {
         openUrl(tweetVM.tweetLink);
       },
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         child: Container(
           decoration: BoxDecoration(
             color: backgroundColor,
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
-            border: new Border.all(
+            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+            border: Border.all(
               color: borderColor,
             ),
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -72,12 +78,15 @@ class QuoteTweetView extends StatelessWidget {
                       ViewMode.quote,
                       userNameStyle: userNameStyle,
                       userScreenNameStyle: userScreenNameStyle,
+                      onUsernamePressed: onUsernamePressed,
                     ),
                     TweetText(
                       tweetVM,
                       textStyle: textStyle,
                       clickableTextStyle: clickableTextStyle,
-                      padding: const EdgeInsets.only(top: 0.0),
+                      onUsernamePressed: onUsernamePressed,
+                      onHashtagPressed: onHashtagPressed,
+                      onUrlPressed: onUrlPressed,
                     ),
                   ],
                 ),

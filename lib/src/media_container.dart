@@ -34,11 +34,11 @@ class MediaContainer extends StatefulWidget {
 
 class _MediaContainerState extends State<MediaContainer>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
-  var hashcode;
+  String hashcode;
 
   @override
   void initState() {
-    hashcode = this.hashCode.toString();
+    hashcode = hashCode.toString();
     super.initState();
   }
 
@@ -108,7 +108,7 @@ class _MediaContainerState extends State<MediaContainer>
                   child: _buildSinglePhoto(context,
                       widget.tweetVM.getDisplayTweet().allPhotos, 0, hashcode),
                 ),
-                VerticalDivider(color: Colors.white, width: 1.0),
+                const VerticalDivider(color: Colors.white, width: 1.0),
                 Expanded(
                   child: _buildSinglePhoto(context,
                       widget.tweetVM.getDisplayTweet().allPhotos, 1, hashcode),
@@ -126,7 +126,7 @@ class _MediaContainerState extends State<MediaContainer>
                   child: _buildSinglePhoto(context,
                       widget.tweetVM.getDisplayTweet().allPhotos, 0, hashcode),
                 ),
-                VerticalDivider(color: Colors.white, width: 1.0),
+                const VerticalDivider(color: Colors.white, width: 1.0),
                 Expanded(
                   child: Column(
                     children: <Widget>[
@@ -137,7 +137,7 @@ class _MediaContainerState extends State<MediaContainer>
                             1,
                             hashcode),
                       ),
-                      Divider(color: Colors.white, height: 1.0),
+                      const Divider(color: Colors.white, height: 1.0),
                       Expanded(
                         child: _buildSinglePhoto(
                             context,
@@ -154,8 +154,11 @@ class _MediaContainerState extends State<MediaContainer>
           break;
         case 4:
           child = AspectRatio(
+            aspectRatio: widget.viewMode == ViewMode.standard
+                ? MediaContainer.SQUARE_ASPECT_RATIO
+                : MediaContainer.DEFAULT_ASPECT_RATIO_MEDIA_CONTAINER,
             child: GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: 4,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -173,9 +176,6 @@ class _MediaContainerState extends State<MediaContainer>
                     hashcode);
               },
             ),
-            aspectRatio: widget.viewMode == ViewMode.standard
-                ? MediaContainer.SQUARE_ASPECT_RATIO
-                : MediaContainer.DEFAULT_ASPECT_RATIO_MEDIA_CONTAINER,
           );
           break;
         default:
@@ -187,15 +187,15 @@ class _MediaContainerState extends State<MediaContainer>
     switch (widget.viewMode) {
       case ViewMode.compact:
         if (!widget.tweetVM.getDisplayTweet().hasSupportedVideo) {
-          borderRadius = BorderRadius.all(Radius.circular(8.0));
+          borderRadius = const BorderRadius.all(Radius.circular(8.0));
         } else {
-          borderRadius = BorderRadius.all(Radius.zero);
+          borderRadius = const BorderRadius.all(Radius.zero);
         }
         break;
       case ViewMode.standard:
       case ViewMode.quote:
       default:
-        borderRadius = BorderRadius.all(Radius.zero);
+        borderRadius = const BorderRadius.all(Radius.zero);
         break;
     }
 
@@ -219,7 +219,8 @@ class _MediaContainerState extends State<MediaContainer>
   /// hashcode - used for the Hero tag. The image URL is not enough - for example, you can still have duplicated tweets on a list.
   Widget _buildSinglePhoto(BuildContext context, List<String> allPhotos,
       int photoIndex, String hashcode) {
-    var galleryPageOptions = List<PhotoViewGalleryPageOptions>();
+    final List<PhotoViewGalleryPageOptions> galleryPageOptions = [];
+    // ignore: avoid_function_literals_in_foreach_calls
     allPhotos.forEach((String photoUrl) {
       galleryPageOptions.add(PhotoViewGalleryPageOptions(
         // TODO add option to choose image size (Twitter supports ":medium" ":large" at the end of photoUrl.
@@ -230,7 +231,7 @@ class _MediaContainerState extends State<MediaContainer>
       ));
     });
     return GestureDetector(
-      onTap: this.widget.onTapImage == null
+      onTap: widget.onTapImage == null
           ? () {
               Navigator.push(context, MaterialPageRoute(
                 builder: (_) {
@@ -241,14 +242,14 @@ class _MediaContainerState extends State<MediaContainer>
                 },
               ));
             }
-          : () => this.widget.onTapImage(allPhotos, photoIndex, hashcode),
+          : () => widget.onTapImage(allPhotos, photoIndex, hashcode),
       child: Hero(
+        tag: allPhotos[photoIndex] + hashcode,
         child: Image(
           image: CachedNetworkImageProvider(allPhotos[photoIndex]),
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
         ),
-        tag: allPhotos[photoIndex] + hashcode,
       ),
     );
   }
