@@ -23,12 +23,12 @@ class UrlEntity extends Entity {
   factory UrlEntity.fromRawJson(String str) =>
       UrlEntity.fromJson(json.decode(str));
 
-  factory UrlEntity.fromJson(Map<String, dynamic> json) => new UrlEntity(
-        url: json["url"] == null ? null : json["url"],
-        expandedUrl: json["expanded_url"] == null ? null : json["expanded_url"],
-        displayUrl: json["display_url"] == null ? null : json["display_url"],
+  factory UrlEntity.fromJson(Map<String, dynamic> json) => UrlEntity(
+        url: json["url"],
+        expandedUrl: json["expanded_url"],
+        displayUrl: json["display_url"],
         indices: json["indices"] == null
             ? null
-            : new List<int>.from(json["indices"].map((x) => x)),
+            : List<int>.from(json["indices"].map((x) => x)),
       );
 }

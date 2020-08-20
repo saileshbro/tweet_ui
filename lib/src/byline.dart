@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tweet_ui/models/viewmodels/tweet_vm.dart';
 import 'package:tweet_ui/src/twitter_logo.dart';
-import 'package:tweet_ui/src/url_launcher.dart';
+// import 'package:tweet_ui/src/url_launcher.dart';
 import 'package:tweet_ui/src/verified_user_badge.dart';
 import 'package:tweet_ui/src/view_mode.dart';
 
@@ -14,6 +14,7 @@ class Byline extends StatelessWidget {
     this.showDate,
     this.userNameStyle,
     this.userScreenNameStyle,
+    @required this.onUsernamePressed,
   }) : super(key: key);
 
   final TweetVM tweetVM;
@@ -21,20 +22,16 @@ class Byline extends StatelessWidget {
   final TextStyle userNameStyle;
   final TextStyle userScreenNameStyle;
   final ViewMode viewMode;
+  final Function(String) onUsernamePressed;
 
   @override
   Widget build(BuildContext context) {
     switch (viewMode) {
       case ViewMode.standard:
         return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 Flexible(
                   child: Text(
@@ -52,38 +49,36 @@ class Byline extends StatelessWidget {
                 ),
               ],
             ),
-            (showDate == null || showDate == true)
-                ? Text(
-                    "@" +
-                        tweetVM.getDisplayTweet().userScreenName +
-                        " • " +
-                        tweetVM.getDisplayTweet().createdAt,
-                    textAlign: TextAlign.start,
-                    style: userScreenNameStyle,
-                  )
-                : Text(
-                    "@" + tweetVM.getDisplayTweet().userScreenName,
-                    textAlign: TextAlign.start,
-                    style: userScreenNameStyle,
-                  ),
+            if (showDate == null || showDate == true)
+              Text(
+                "@${tweetVM.getDisplayTweet().userScreenName} • ${tweetVM.getDisplayTweet().createdAt}",
+                textAlign: TextAlign.start,
+                style: userScreenNameStyle,
+              )
+            else
+              Text(
+                "@${tweetVM.getDisplayTweet().userScreenName}",
+                textAlign: TextAlign.start,
+                style: userScreenNameStyle,
+              ),
           ],
         );
         break;
       case ViewMode.compact:
       case ViewMode.quote:
         return Row(
-          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Expanded(
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                onTap: () {
-                  openUrl(tweetVM.getDisplayTweet().userLink);
-                },
+                // onTap: () {
+                //   openUrl(tweetVM.getDisplayTweet().userLink);
+                // },
+                onTap: () =>
+                    onUsernamePressed(tweetVM.getDisplayTweet().userScreenName),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Text(
                       tweetVM.getDisplayTweet().userName,
@@ -99,7 +94,7 @@ class Byline extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 4.0),
                         child: Text(
-                          "@" + tweetVM.getDisplayTweet().userScreenName,
+                          "@${tweetVM.getDisplayTweet().userScreenName}",
                           style: userScreenNameStyle,
                           maxLines: 1,
                           overflow: TextOverflow.fade,
@@ -108,27 +103,27 @@ class Byline extends StatelessWidget {
                         ),
                       ),
                     ),
-                    (showDate == null || showDate == true)
-                        ? Flexible(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 4.0),
-                              child: Text(
-                                "• " + tweetVM.getDisplayTweet().createdAt,
-                                style: userScreenNameStyle,
-                                maxLines: 1,
-                                overflow: TextOverflow.fade,
-                                softWrap: false,
-                                textAlign: TextAlign.start,
-                              ),
-                            ),
-                          )
-                        : Container(),
+                    if (showDate == null || showDate == true)
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          child: Text(
+                            "• ${tweetVM.getDisplayTweet().createdAt}",
+                            style: userScreenNameStyle,
+                            maxLines: 1,
+                            overflow: TextOverflow.fade,
+                            softWrap: false,
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                      )
+                    else
+                      Container(),
                   ],
                 ),
               ),
             ),
-            TwitterLogo(),
+            const TwitterLogo(),
           ],
         );
       default:

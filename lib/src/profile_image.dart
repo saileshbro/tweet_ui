@@ -17,7 +17,7 @@ class ProfileImage extends StatelessWidget {
       width: 40,
       imageUrl: tweetVM.getDisplayTweet().profileUrl,
       placeholder: (context, url) => Container(height: 40, width: 40),
-      errorWidget: (context, url, error) => Icon(Icons.error),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
 }

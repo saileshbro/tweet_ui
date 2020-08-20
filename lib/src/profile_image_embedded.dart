@@ -13,7 +13,7 @@ class ProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(right: 5),
+        margin: const EdgeInsets.only(right: 5),
         child: CircleAvatar(
           backgroundImage:
               CachedNetworkImageProvider(tweetVM.getDisplayTweet().profileUrl),

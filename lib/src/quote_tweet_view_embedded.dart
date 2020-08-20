@@ -4,7 +4,6 @@ import 'package:tweet_ui/on_tap_image.dart';
 import 'package:tweet_ui/src/byline.dart';
 import 'package:tweet_ui/src/media_container.dart';
 import 'package:tweet_ui/src/tweet_text.dart';
-import 'package:tweet_ui/src/url_launcher.dart';
 import 'package:tweet_ui/src/view_mode.dart';
 
 typedef onTapImage = void Function(
@@ -19,8 +18,12 @@ class QuoteTweetViewEmbed extends StatelessWidget {
   final Color borderColor;
   final Color backgroundColor;
   final OnTapImage onTapImage;
+  final Function(String str) onUsernamePressed;
+  final Function(String str) onHashtagPressed;
+  final Function(String str) onUrlPressed;
+  final Function(String str) onTweetPressed;
 
-  QuoteTweetViewEmbed(
+  const QuoteTweetViewEmbed(
     this.tweetVM, {
     this.userNameStyle,
     this.userScreenNameStyle,
@@ -29,9 +32,13 @@ class QuoteTweetViewEmbed extends StatelessWidget {
     this.borderColor,
     this.backgroundColor,
     this.onTapImage,
+    @required this.onTweetPressed,
+    @required this.onUsernamePressed,
+    @required this.onHashtagPressed,
+    @required this.onUrlPressed,
   }); //  TweetView(this.tweetVM);
 
-  QuoteTweetViewEmbed.fromTweet(
+  const QuoteTweetViewEmbed.fromTweet(
     this.tweetVM, {
     this.userNameStyle,
     this.userScreenNameStyle,
@@ -40,29 +47,35 @@ class QuoteTweetViewEmbed extends StatelessWidget {
     this.borderColor,
     this.backgroundColor,
     this.onTapImage,
+    @required this.onTweetPressed,
+    @required this.onUsernamePressed,
+    @required this.onHashtagPressed,
+    @required this.onUrlPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      // onTap: () {
+      //   openUrl(tweetVM.tweetLink);
+      // },
       onTap: () {
-        openUrl(tweetVM.tweetLink);
+        onTweetPressed(tweetVM.tweetLink);
       },
+
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         child: Container(
           decoration: BoxDecoration(
             color: backgroundColor,
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
-            border: new Border.all(
+            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+            border: Border.all(
               width: 0.8,
               color: Colors.grey[400],
             ),
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -71,6 +84,7 @@ class QuoteTweetViewEmbed extends StatelessWidget {
                     Byline(
                       tweetVM,
                       ViewMode.quote,
+                      onUsernamePressed: onUsernamePressed,
                       userNameStyle: userNameStyle,
                       userScreenNameStyle: userScreenNameStyle,
                       showDate: false,
@@ -80,6 +94,9 @@ class QuoteTweetViewEmbed extends StatelessWidget {
                       textStyle: textStyle,
                       clickableTextStyle: clickableTextStyle,
                       padding: const EdgeInsets.symmetric(vertical: 15.0),
+                      onHashtagPressed: onHashtagPressed,
+                      onUrlPressed: onUrlPressed,
+                      onUsernamePressed: onUsernamePressed,
                     ),
                   ],
                 ),

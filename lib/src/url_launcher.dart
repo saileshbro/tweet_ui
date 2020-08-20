@@ -1,7 +1,7 @@
-import 'package:url_launcher/url_launcher.dart';
-
-void openUrl(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  }
+void openUrl(String url) {
+  // if (await canLaunch(url)) {
+  //   await launch(url);
+  // }
+  // ignore: avoid_print
+  print("SHOULD BE REMOVED THIS: $url");
 }

@@ -15,10 +15,10 @@ class SymbolEntity extends Entity {
   factory SymbolEntity.fromRawJson(String str) =>
       SymbolEntity.fromJson(json.decode(str));
 
-  factory SymbolEntity.fromJson(Map<String, dynamic> json) => new SymbolEntity(
-        text: json["text"] == null ? null : json["text"],
+  factory SymbolEntity.fromJson(Map<String, dynamic> json) => SymbolEntity(
+        text: json["text"],
         indices: json["indices"] == null
             ? null
-            : new List<int>.from(json["indices"].map((x) => x)),
+            : List<int>.from(json["indices"].map((x) => x)),
       );
 }

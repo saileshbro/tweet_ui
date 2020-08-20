@@ -34,13 +34,11 @@ class User {
 
   factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
 
-  factory User.fromJson(Map<String, dynamic> json) => new User(
+  factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"] == null ? null : json["id"].toDouble(),
-        name: json["name"] == null ? null : json["name"],
-        screenName: json["screen_name"] == null ? null : json["screen_name"],
-        verified: json["verified"] == null ? null : json["verified"],
-        profileImageUrlHttps: json["profile_image_url_https"] == null
-            ? null
-            : json["profile_image_url_https"],
+        name: json["name"],
+        screenName: json["screen_name"],
+        verified: json["verified"],
+        profileImageUrlHttps: json["profile_image_url_https"],
       );
 }

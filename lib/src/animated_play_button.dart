@@ -25,8 +25,7 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 200),
-      lowerBound: 0.0,
+      duration: const Duration(milliseconds: 200),
       upperBound: 0.1,
     )..addListener(() {
         setState(() {});
@@ -46,6 +45,10 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
           builder: (_) {
             SystemChrome.setEnabledSystemUIOverlays([]);
             return WillPopScope(
+              onWillPop: () {
+                SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+                return Future.value(true);
+              },
               child: Scaffold(
                 resizeToAvoidBottomPadding: false,
                 backgroundColor: Colors.black,
@@ -55,10 +58,6 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
                   ),
                 ),
               ),
-              onWillPop: () {
-                SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-                return Future.value(true);
-              },
             );
           },
         ));
