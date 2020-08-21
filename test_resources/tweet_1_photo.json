@@ -2,29 +2,50 @@
   "created_at": "Mon Nov 12 13:00:38 +0000 2018",
   "id": 1061967001177018368,
   "id_str": "1061967001177018368",
-  "text": "Set up this demo account the day I joined GNIP... Six years ago today. #MyTwitterAnniversary https://t.co/Zg4ithsMXv",
+  "full_text": "Set up this demo account the day I joined GNIP... Six years ago today. #MyTwitterAnniversary https://t.co/Zg4ithsMXv",
   "truncated": false,
+  "display_text_range": [0, 88],
   "entities": {
     "hashtags": [
       {
         "text": "MyTwitterAnniversary",
-        "indices": [
-          71,
-          92
-        ]
+        "indices": [71, 92]
+      },
+      {
+        "text": "UCL",
+        "indices": [84, 88]
       }
     ],
     "symbols": [],
-    "user_mentions": [],
-    "urls": [],
+    "user_mentions": [
+      {
+        "screen_name": "ekantipur_com",
+        "name": "ekantipur",
+        "id": 364761398,
+        "id_str": "364761398",
+        "indices": [3, 17]
+      },
+      {
+        "screen_name": "Cookie",
+        "name": "Connie Loizos",
+        "id": 7095,
+        "id_str": "7095",
+        "indices": [120, 127]
+      }
+    ],
+    "urls": [
+      {
+        "url": "https://t.co/TBjuUeE8BH",
+        "expanded_url": "https://tcrn.ch/31c8Txm",
+        "display_url": "tcrn.ch/31c8Txm",
+        "indices": [93, 116]
+      }
+    ],
     "media": [
       {
         "id": 1061966991848804353,
         "id_str": "1061966991848804353",
-        "indices": [
-          93,
-          116
-        ],
+        "indices": [93, 116],
         "media_url": "http://pbs.twimg.com/media/DrzdWkBWkAEqlHb.jpg",
         "media_url_https": "https://pbs.twimg.com/media/DrzdWkBWkAEqlHb.jpg",
         "url": "https://t.co/Zg4ithsMXv",
@@ -53,6 +74,39 @@
             "resize": "fit"
           }
         }
+      },
+      {
+        "id": 1296466553580462000,
+        "id_str": "1296466553580462083",
+        "indices": [89, 112],
+        "media_url": "http://pbs.twimg.com/amplify_video_thumb/1296466553580462083/img/eZJYZuW4A0ZPLiyd.jpg",
+        "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/1296466553580462083/img/eZJYZuW4A0ZPLiyd.jpg",
+        "url": "https://t.co/QvcYVwHy64",
+        "display_url": "pic.twitter.com/QvcYVwHy64",
+        "expanded_url": "https://twitter.com/ChampionsLeague/status/1296467509567197184/video/1",
+        "type": "photo",
+        "sizes": {
+          "thumb": {
+            "w": 150,
+            "h": 150,
+            "resize": "crop"
+          },
+          "small": {
+            "w": 680,
+            "h": 680,
+            "resize": "fit"
+          },
+          "medium": {
+            "w": 720,
+            "h": 720,
+            "resize": "fit"
+          },
+          "large": {
+            "w": 720,
+            "h": 720,
+            "resize": "fit"
+          }
+        }
       }
     ]
   },
@@ -61,10 +115,7 @@
       {
         "id": 1061966991848804353,
         "id_str": "1061966991848804353",
-        "indices": [
-          93,
-          116
-        ],
+        "indices": [93, 116],
         "media_url": "http://pbs.twimg.com/media/DrzdWkBWkAEqlHb.jpg",
         "media_url_https": "https://pbs.twimg.com/media/DrzdWkBWkAEqlHb.jpg",
         "url": "https://t.co/Zg4ithsMXv",
@@ -92,6 +143,113 @@
             "h": 675,
             "resize": "fit"
           }
+        }
+      },
+      {
+        "id": 1296466553580462000,
+        "id_str": "1296466553580462083",
+        "indices": [89, 112],
+        "media_url": "http://pbs.twimg.com/amplify_video_thumb/1296466553580462083/img/eZJYZuW4A0ZPLiyd.jpg",
+        "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/1296466553580462083/img/eZJYZuW4A0ZPLiyd.jpg",
+        "url": "https://t.co/QvcYVwHy64",
+        "display_url": "pic.twitter.com/QvcYVwHy64",
+        "expanded_url": "https://twitter.com/ChampionsLeague/status/1296467509567197184/video/1",
+        "type": "video",
+        "sizes": {
+          "thumb": {
+            "w": 150,
+            "h": 150,
+            "resize": "crop"
+          },
+          "small": {
+            "w": 680,
+            "h": 680,
+            "resize": "fit"
+          },
+          "medium": {
+            "w": 720,
+            "h": 720,
+            "resize": "fit"
+          },
+          "large": {
+            "w": 720,
+            "h": 720,
+            "resize": "fit"
+          }
+        },
+        "video_info": {
+          "aspect_ratio": [1, 1],
+          "duration_millis": 59040,
+          "variants": [
+            {
+              "bitrate": 432000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1296466553580462083/vid/320x320/JmGrcC7Vrl5PyGc7.mp4?tag=13"
+            },
+            {
+              "bitrate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1296466553580462083/vid/480x480/TUoggnUViOQvx3fB.mp4?tag=13"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/1296466553580462083/pl/NTIK62zzrm4feXnB.m3u8?tag=13"
+            },
+            {
+              "bitrate": 1280000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1296466553580462083/vid/720x720/BzpjJZKFae0rkHQF.mp4?tag=13"
+            }
+          ]
+        },
+        "additional_media_info": {
+          "title": "",
+          "description": "",
+          "embeddable": true,
+          "monetizable": false
+        }
+      },
+      {
+        "id": 1296451368224469000,
+        "id_str": "1296451368224468992",
+        "indices": [138, 161],
+        "media_url": "http://pbs.twimg.com/tweet_video_thumb/Ef3rpoeWsAA5t7p.jpg",
+        "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/Ef3rpoeWsAA5t7p.jpg",
+        "url": "https://t.co/0OiWOdJRAB",
+        "display_url": "pic.twitter.com/0OiWOdJRAB",
+        "expanded_url": "https://twitter.com/TechCrunch/status/1296451420913270784/photo/1",
+        "type": "animated_gif",
+        "sizes": {
+          "thumb": {
+            "w": 150,
+            "h": 150,
+            "resize": "crop"
+          },
+          "medium": {
+            "w": 862,
+            "h": 430,
+            "resize": "fit"
+          },
+          "large": {
+            "w": 862,
+            "h": 430,
+            "resize": "fit"
+          },
+          "small": {
+            "w": 680,
+            "h": 339,
+            "resize": "fit"
+          }
+        },
+        "video_info": {
+          "aspect_ratio": [431, 215],
+          "variants": [
+            {
+              "bitrate": 0,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/tweet_video/Ef3rpoeWsAA5t7p.mp4"
+            }
+          ]
         }
       }
     ]
@@ -117,15 +275,19 @@
             "url": "https://t.co/rzmuONbWMR",
             "expanded_url": "https://github.com/jimmoffitt/FloodSocial",
             "display_url": "github.com/jimmoffitt/Flo…",
-            "indices": [
-              0,
-              23
-            ]
+            "indices": [0, 23]
           }
         ]
       },
       "description": {
-        "urls": []
+        "urls": [
+          {
+            "url": "https://t.co/vawUiHVVB5",
+            "expanded_url": "http://nayapatrikadaily.com",
+            "display_url": "nayapatrikadaily.com",
+            "indices": [86, 109]
+          }
+        ]
       }
     },
     "protected": false,
@@ -134,8 +296,8 @@
     "listed_count": 5,
     "created_at": "Mon Nov 12 19:59:55 +0000 2012",
     "favourites_count": 36,
-    "utc_offset": null,
-    "time_zone": null,
+    "utc_offset": "some null value",
+    "time_zone": "some null value",
     "geo_enabled": true,
     "verified": false,
     "statuses_count": 187,
@@ -158,17 +320,252 @@
     "has_extended_profile": false,
     "default_profile": false,
     "default_profile_image": false,
-    "following": null,
-    "follow_request_sent": null,
-    "notifications": null,
+    "following": true,
+    "follow_request_sent": false,
+    "notifications": false,
     "translator_type": "none"
   },
   "geo": null,
   "coordinates": null,
-  "place": null,
+  "place": {
+    "id": "f1d3a53f8a3cc7e9",
+    "url": "https://api.twitter.com/1.1/geo/id/f1d3a53f8a3cc7e9.json",
+    "place_type": "country",
+    "name": "Nepal",
+    "full_name": "Nepal",
+    "country_code": "NP",
+    "country": "Nepal",
+    "contained_within": [],
+    "bounding_box": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [80.0633414, 26.3483092],
+          [88.2026997, 26.3483092],
+          [88.2026997, 30.4333897],
+          [80.0633414, 30.4333897]
+        ]
+      ]
+    },
+    "attributes": {}
+  },
   "contributors": null,
-  "is_quote_status": false,
+  "retweeted_status": {
+    "created_at": "Wed Aug 19 02:50:00 +0000 2020",
+    "id": 1295915893839470600,
+    "id_str": "1295915893839470594",
+    "full_text": "हरि राेका लेख्छन्– ओली प्रशासनले जसरी पुँजीपति वर्गको लाभका खातिर सार्वजनिक सम्पत्तिमाथि आर्थिक दोहनचक्रलाई निरन्तरता दिइरहेको छ, यसले सत्तारूढ नेकपा पुँजीवादी विचार र कार्यक्रममा आधारित दक्षिणपन्थी पार्टी हो भन्ने पुष्टि गरेको छ ।\nhttps://t.co/nvqfJZHzcj",
+    "truncated": false,
+    "display_text_range": [0, 255],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": [
+        {
+          "url": "https://t.co/nvqfJZHzcj",
+          "expanded_url": "https://ekantipur.com/opinion/2020/08/19/159780409143294453.html",
+          "display_url": "ekantipur.com/opinion/2020/0…",
+          "indices": [232, 255]
+        }
+      ]
+    },
+    "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+    "in_reply_to_status_id": 1294917888487219200,
+    "in_reply_to_status_id_str": "1294917888487219201",
+    "in_reply_to_user_id": 3269822791,
+    "in_reply_to_user_id_str": "3269822791",
+    "in_reply_to_screen_name": "NFAIOfficial",
+    "user": {
+      "id": 364761398,
+      "id_str": "364761398",
+      "name": "ekantipur",
+      "screen_name": "ekantipur_com",
+      "location": "CentralBusinessPark, Kathmandu",
+      "description": "Ekantipur is Nepal’s most visited news portal. Official Twitter handle of https://t.co/8u1xI2Od0w",
+      "url": "http://t.co/F4c3kGwRRe",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/F4c3kGwRRe",
+              "expanded_url": "http://www.ekantipur.com",
+              "display_url": "ekantipur.com",
+              "indices": [0, 22]
+            }
+          ]
+        },
+        "description": {
+          "urls": [
+            {
+              "url": "https://t.co/8u1xI2Od0w",
+              "expanded_url": "http://ekantipur.com",
+              "display_url": "ekantipur.com",
+              "indices": [74, 97]
+            }
+          ]
+        }
+      },
+      "protected": false,
+      "followers_count": 1144450,
+      "friends_count": 82,
+      "listed_count": 529,
+      "created_at": "Tue Aug 30 08:57:14 +0000 2011",
+      "favourites_count": 69,
+      "utc_offset": "SOME OFFSET VALUE",
+      "time_zone": "SOME TIME ZONE",
+      "geo_enabled": true,
+      "verified": true,
+      "statuses_count": 169125,
+      "lang": "ne",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/1159653964343681024/IZ-6c3g6_normal.jpg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1159653964343681024/IZ-6c3g6_normal.jpg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/364761398/1565317980",
+      "profile_link_color": "1DA1F2",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "has_extended_profile": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false,
+      "translator_type": "none"
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 7,
+    "favorite_count": 32,
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_appealable": false,
+    "lang": "ne"
+  },
+  "is_quote_status": true,
+  "quoted_status_id": 1296106357125333000,
+  "quoted_status_id_str": "1296106357125332993",
   "retweet_count": 0,
+  "quoted_status_permalink": {
+    "url": "https://t.co/5STedsAwBa",
+    "expanded": "https://twitter.com/basant_cg/status/1296106357125332993",
+    "display": "twitter.com/basant_cg/stat…"
+  },
+  "quoted_status": {
+    "created_at": "Wed Aug 19 15:26:50 +0000 2020",
+    "id": 1296106357125333000,
+    "id_str": "1296106357125332993",
+    "full_text": "माननीय मन्त्रीज्यू तपाईं अत्यन्त भद्र र बेदागी नेता हुनुहुन्छ। यो सत्य हो! तपाईंको विगतका बारेमा मलाई थाहा छ। तर यो पनि सत्य हो, तपाईंको भद्रतालाई अरूले दुरुपयोग गर्दैछन्। म तपाईंको शुभेच्छु हूँ त्यसैले भन्दैछु, आफूलाई प्रयोग हुन नदिनुहोस्। तपाईंको राजनीतिक जीवन धेरै आशालाग्दो छ। https://t.co/lADJRJmEV4",
+    "truncated": false,
+    "display_text_range": [0, 280],
+    "entities": {
+      "hashtags": [],
+      "user_mentions": [],
+      "urls": [
+        {
+          "url": "https://t.co/lADJRJmEV4",
+          "expanded_url": "https://twitter.com/dhbhanu/status/1296067633658257409",
+          "display_url": "twitter.com/dhbhanu/status…",
+          "indices": [281, 304]
+        }
+      ]
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2936311308,
+      "id_str": "2936311308",
+      "name": "Basant Chaudhary",
+      "screen_name": "basant_cg",
+      "location": "Kathmandu, Nepal",
+      "description": "Poet, Writer & Social Enthusiast. Views expressed here are personal and nothing to do with my business or CG as a whole.",
+      "url": "https://t.co/0klNcgDpas",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "https://t.co/0klNcgDpas",
+              "expanded_url": "http://www.basantchaudhary.com",
+              "display_url": "basantchaudhary.com",
+              "indices": [0, 23]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 15838,
+      "friends_count": 719,
+      "listed_count": 6,
+      "created_at": "Fri Dec 19 18:37:43 +0000 2014",
+      "favourites_count": 5218,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 1433,
+      "lang": null,
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "000000",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/1286237855614775297/uADJ2v4U_normal.jpg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1286237855614775297/uADJ2v4U_normal.jpg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/2936311308/1421322687",
+      "profile_link_color": "DD2E44",
+      "profile_sidebar_border_color": "000000",
+      "profile_sidebar_fill_color": "000000",
+      "profile_text_color": "000000",
+      "profile_use_background_image": false,
+      "has_extended_profile": true,
+      "default_profile": false,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false,
+      "translator_type": "none"
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "is_quote_status": true,
+    "quoted_status_id": 1296067633658257400,
+    "quoted_status_id_str": "1296067633658257409",
+    "quoted_status_permalink": {
+      "url": "https://t.co/lADJRJmEV4",
+      "expanded": "https://twitter.com/dhbhanu/status/1296067633658257409",
+      "display": "twitter.com/dhbhanu/status…"
+    },
+    "retweet_count": 37,
+    "favorite_count": 411,
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_appealable": false,
+    "lang": "ne"
+  },
   "favorite_count": 2,
   "favorited": false,
   "retweeted": false,
