@@ -7,7 +7,7 @@ class User {
   /// This number is greater than 53 bits and some programming languages may have difficulty/silent defects in interpreting it.
   /// Using a signed 64 bit integer for storing this identifier is safe.
   /// Use id_str for fetching the identifier to stay on the safe side. See Twitter IDs, JSON and Snowflake .
-  double id;
+  num id;
 
   /// The name of the user, as they’ve defined it. Not necessarily a person’s name.
   /// Typically capped at 50 characters, but subject to change.
@@ -35,7 +35,7 @@ class User {
   factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"] == null ? null : json["id"].toDouble(),
+        id: json["id"],
         name: json["name"],
         screenName: json["screen_name"],
         verified: json["verified"],

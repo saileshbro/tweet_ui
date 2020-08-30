@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:tweet_ui/models/api/entieties/hashtag_entity.dart';
-import 'package:tweet_ui/models/api/entieties/media_entity.dart';
-import 'package:tweet_ui/models/api/entieties/mention_entity.dart';
-import 'package:tweet_ui/models/api/entieties/symbol_entity.dart';
-import 'package:tweet_ui/models/api/entieties/url_entity.dart';
+import 'package:tweet_ui/models/api/entities/hashtag_entity.dart';
+import 'package:tweet_ui/models/api/entities/media_entity.dart';
+import 'package:tweet_ui/models/api/entities/mention_entity.dart';
+import 'package:tweet_ui/models/api/entities/symbol_entity.dart';
+import 'package:tweet_ui/models/api/entities/url_entity.dart';
 
 /// Provides metadata and additional contextual information about content posted in a tweet.
 class TweetEntities {

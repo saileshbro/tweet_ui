@@ -18,10 +18,11 @@ class QuoteTweetViewEmbed extends StatelessWidget {
   final Color borderColor;
   final Color backgroundColor;
   final OnTapImage onTapImage;
-  final Function(String str) onUsernamePressed;
-  final Function(String str) onHashtagPressed;
-  final Function(String str) onUrlPressed;
-  final Function(String str) onTweetPressed;
+  final Function(String username) onUsernamePressed;
+  final Function(String hashtag) onHashtagPressed;
+  final Function(String url) onUrlPressed;
+  final Function(String tweetLink) onTweetPressed;
+  final Function(String symbol) onSymblolPressed;
 
   const QuoteTweetViewEmbed(
     this.tweetVM, {
@@ -36,6 +37,7 @@ class QuoteTweetViewEmbed extends StatelessWidget {
     @required this.onUsernamePressed,
     @required this.onHashtagPressed,
     @required this.onUrlPressed,
+    @required this.onSymblolPressed,
   }); //  TweetView(this.tweetVM);
 
   const QuoteTweetViewEmbed.fromTweet(
@@ -51,18 +53,15 @@ class QuoteTweetViewEmbed extends StatelessWidget {
     @required this.onUsernamePressed,
     @required this.onHashtagPressed,
     @required this.onUrlPressed,
+    @required this.onSymblolPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () {
-      //   openUrl(tweetVM.tweetLink);
-      // },
       onTap: () {
         onTweetPressed(tweetVM.tweetLink);
       },
-
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         child: Container(
@@ -97,6 +96,7 @@ class QuoteTweetViewEmbed extends StatelessWidget {
                       onHashtagPressed: onHashtagPressed,
                       onUrlPressed: onUrlPressed,
                       onUsernamePressed: onUsernamePressed,
+                      onSymbolPressed: onSymblolPressed,
                     ),
                   ],
                 ),

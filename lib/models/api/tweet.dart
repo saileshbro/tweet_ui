@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:tweet_ui/models/api/entieties/tweet_entities.dart';
+import 'package:tweet_ui/models/api/entities/tweet_entities.dart';
 import 'package:tweet_ui/models/api/user.dart';
 
 /// docs are from https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object
@@ -19,7 +19,7 @@ class Tweet {
   /// than 53 bits and some programming languages may have difficulty/silent defects in
   /// interpreting it. Using a signed 64 bit integer for storing this identifier is safe. Use
   /// id_str for fetching the identifier to stay on the safe side. See Twitter IDs, JSON andSnowflake.
-  double id;
+  num id;
 
   /// The string representation of the unique identifier for this Tweet. Implementations should use
   /// this rather than the large integer in id
@@ -87,7 +87,7 @@ class Tweet {
 
   factory Tweet.fromJson(Map<String, dynamic> json) => Tweet(
         createdAt: json["created_at"],
-        id: json["id"] == null ? null : json["id"].toDouble(),
+        id: json["id"],
         idStr: json["id_str"],
         quotedStatus: json["quoted_status"] == null
             ? null

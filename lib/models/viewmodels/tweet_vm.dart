@@ -1,15 +1,15 @@
 import 'package:intl/intl.dart';
-import 'package:tweet_ui/models/api/entieties/entity.dart';
-import 'package:tweet_ui/models/api/entieties/media_entity.dart';
-import 'package:tweet_ui/models/api/entieties/tweet_entities.dart';
+import 'package:tweet_ui/models/api/entities/entity.dart';
+import 'package:tweet_ui/models/api/entities/media_entity.dart';
+import 'package:tweet_ui/models/api/entities/tweet_entities.dart';
 import 'package:tweet_ui/models/api/tweet.dart';
 
 class TweetVM {
-  static const String _PHOTO_TYPE = "photo";
-  static const String _VIDEO_TYPE = "video";
-  static const String _GIF_TYPE = "animated_gif";
-  static const String _TWITTER_URL = "https://twitter.com/";
-  static const String _UNKNOWN_SCREEN_NAME = "twitter_unknown";
+  static const String _kPhotoType = "photo";
+  static const String _kVideoType = "video";
+  static const String _kGifType = "animated_gif";
+  static const String _kTwitterUrl = "https://twitter.com/";
+  static const String _kUnknownScreenName = "twitter_unknown";
 
   final String createdAt;
   final bool hasSupportedVideo;
@@ -60,7 +60,14 @@ class TweetVM {
     this.endDisplayText,
     this.retweetsCount,
   });
-
+  factory TweetVM._quotedTweet(
+      Tweet tweet, DateFormat createdDateDisplayFormat) {
+    if (tweet != null) {
+      return TweetVM.fromApiModel(tweet, createdDateDisplayFormat);
+    } else {
+      return null;
+    }
+  }
   factory TweetVM.fromApiModel(
           Tweet tweet, DateFormat createdDateDisplayFormat) =>
       TweetVM(
@@ -77,9 +84,10 @@ class TweetVM {
         allPhotos: _allPhotos(tweet),
         userName: _userName(tweet),
         userScreenName: _userScreenName(tweet),
-        quotedTweet: _quotedTweet(tweet.quotedStatus, createdDateDisplayFormat),
-        retweetedTweet:
-            _retweetedTweet(tweet.retweetedStatus, createdDateDisplayFormat),
+        quotedTweet:
+            TweetVM._quotedTweet(tweet.quotedStatus, createdDateDisplayFormat),
+        retweetedTweet: TweetVM._retweetedTweet(
+            tweet.retweetedStatus, createdDateDisplayFormat),
         userVerified: _userVerified(tweet),
         videoPlaceholderUrl: _videoPlaceholderUrl(tweet),
         videoUrl: _videoUrl(tweet),
@@ -94,20 +102,20 @@ class TweetVM {
     final DateFormat twitterFormat =
         DateFormat("EEE MMM dd HH:mm:ss '+0000' yyyy", 'en_US');
     final dateTime = twitterFormat.parseUTC(tweet.createdAt).toLocal();
-    return (displayFormat ?? DateFormat("HH:mm • MM.dd.yyyy", 'en_US'))
+    return (displayFormat ?? DateFormat("EEE MMM dd, yyyy h:mm a"))
         .format(dateTime);
   }
 
   static bool _isPhotoType(MediaEntity mediaEntity) {
-    return _PHOTO_TYPE == mediaEntity.type;
+    return _kPhotoType == mediaEntity.type;
   }
 
   static bool _isVideoType(MediaEntity mediaEntity) {
-    return _VIDEO_TYPE == mediaEntity.type || _GIF_TYPE == mediaEntity.type;
+    return _kVideoType == mediaEntity.type || _kGifType == mediaEntity.type;
   }
 
   static bool _isGifType(MediaEntity mediaEntity) {
-    return _GIF_TYPE == mediaEntity.type;
+    return _kGifType == mediaEntity.type;
   }
 
   static bool _hasSupportedVideo(Tweet tweet) {
@@ -200,9 +208,9 @@ class TweetVM {
       return null;
     }
     if (tweet.user.screenName.isEmpty) {
-      return "$_TWITTER_URL$_UNKNOWN_SCREEN_NAME/status/${tweet.idStr}";
+      return "$_kTwitterUrl$_kUnknownScreenName/status/${tweet.idStr}";
     } else {
-      return "$_TWITTER_URL${tweet.user.screenName}/status/${tweet.idStr}";
+      return "$_kTwitterUrl${tweet.user.screenName}/status/${tweet.idStr}";
     }
   }
 
@@ -234,16 +242,7 @@ class TweetVM {
     return tweet.user.screenName;
   }
 
-  static TweetVM _quotedTweet(
-      Tweet tweet, DateFormat createdDateDisplayFormat) {
-    if (tweet != null) {
-      return TweetVM.fromApiModel(tweet, createdDateDisplayFormat);
-    } else {
-      return null;
-    }
-  }
-
-  static TweetVM _retweetedTweet(
+  factory TweetVM._retweetedTweet(
       Tweet tweet, DateFormat createdDateDisplayFormat) {
     if (tweet != null) {
       return TweetVM.fromApiModel(tweet, createdDateDisplayFormat);

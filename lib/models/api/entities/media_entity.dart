@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:tweet_ui/models/api/entieties/url_entity.dart';
+import 'package:tweet_ui/models/api/entities/url_entity.dart';
 
 /// Represents media elements uploaded with the Tweet.
 class MediaEntity extends UrlEntity {
   /// ID of the media expressed as a 64-bit integer.
-  double id;
+  num id;
 
   /// An https:// URL pointing directly to the uploaded media file, for embedding on https pages.
   /// For media in direct messages, media_url_https must be accessed by signing a request with the user’s access token using OAuth 1.0A.
@@ -44,7 +44,7 @@ class MediaEntity extends UrlEntity {
       MediaEntity.fromJson(json.decode(str));
 
   factory MediaEntity.fromJson(Map<String, dynamic> json) => MediaEntity(
-        id: json["id"] == null ? null : json["id"].toDouble(),
+        id: json["id"],
         mediaUrlHttps: json["media_url_https"],
         url: json["url"],
         displayUrl: json["display_url"],

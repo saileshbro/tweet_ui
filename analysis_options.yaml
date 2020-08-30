@@ -1,8 +1,4 @@
 include: package:lint/analysis_options.yaml
 analyzer:
   errors:
-    missing_required_param: error
     argument_type_not_assignable: ignore
-    constant_identifier_names: ignore
-    prefer_constructors_over_static_methods: ignore
-    prefer_null_aware_operators: ignore

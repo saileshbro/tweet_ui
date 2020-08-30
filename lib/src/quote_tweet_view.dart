@@ -4,7 +4,6 @@ import 'package:tweet_ui/on_tap_image.dart';
 import 'package:tweet_ui/src/byline.dart';
 import 'package:tweet_ui/src/media_container.dart';
 import 'package:tweet_ui/src/tweet_text.dart';
-import 'package:tweet_ui/src/url_launcher.dart';
 import 'package:tweet_ui/src/view_mode.dart';
 
 typedef onTapImage = void Function(
@@ -22,6 +21,7 @@ class QuoteTweetView extends StatelessWidget {
   final Function(String username) onUsernamePressed;
   final Function(String hashtag) onHashtagPressed;
   final Function(String url) onUrlPressed;
+  final Function(String symbol) onSymbolPressed;
   const QuoteTweetView(
     this.tweetVM, {
     this.userNameStyle,
@@ -34,6 +34,7 @@ class QuoteTweetView extends StatelessWidget {
     @required this.onUsernamePressed,
     @required this.onHashtagPressed,
     @required this.onUrlPressed,
+    @required this.onSymbolPressed,
   }); //  TweetView(this.tweetVM);
 
   const QuoteTweetView.fromTweet(
@@ -48,13 +49,14 @@ class QuoteTweetView extends StatelessWidget {
     @required this.onUsernamePressed,
     @required this.onHashtagPressed,
     @required this.onUrlPressed,
+    @required this.onSymbolPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        openUrl(tweetVM.tweetLink);
+        onUrlPressed(tweetVM.tweetLink);
       },
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(8.0)),
@@ -87,6 +89,7 @@ class QuoteTweetView extends StatelessWidget {
                       onUsernamePressed: onUsernamePressed,
                       onHashtagPressed: onHashtagPressed,
                       onUrlPressed: onUrlPressed,
+                      onSymbolPressed: onSymbolPressed,
                     ),
                   ],
                 ),

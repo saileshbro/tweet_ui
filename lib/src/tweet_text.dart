@@ -3,12 +3,11 @@ import 'dart:math';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:html_unescape/html_unescape_small.dart';
-import 'package:tweet_ui/models/api/entieties/hashtag_entity.dart';
-import 'package:tweet_ui/models/api/entieties/mention_entity.dart';
-import 'package:tweet_ui/models/api/entieties/symbol_entity.dart';
-import 'package:tweet_ui/models/api/entieties/url_entity.dart';
+import 'package:tweet_ui/models/api/entities/hashtag_entity.dart';
+import 'package:tweet_ui/models/api/entities/mention_entity.dart';
+import 'package:tweet_ui/models/api/entities/symbol_entity.dart';
+import 'package:tweet_ui/models/api/entities/url_entity.dart';
 import 'package:tweet_ui/models/viewmodels/tweet_vm.dart';
-import 'package:tweet_ui/src/url_launcher.dart';
 
 class TweetText extends StatelessWidget {
   final TweetVM tweetVM;
@@ -18,6 +17,7 @@ class TweetText extends StatelessWidget {
   final Function(String username) onUsernamePressed;
   final Function(String hashtag) onHashtagPressed;
   final Function(String url) onUrlPressed;
+  final Function(String symbol) onSymbolPressed;
 
   const TweetText(
     this.tweetVM, {
@@ -28,6 +28,7 @@ class TweetText extends StatelessWidget {
     @required this.onUsernamePressed,
     @required this.onHashtagPressed,
     @required this.onUrlPressed,
+    @required this.onSymbolPressed,
   }) : super(key: key);
 
   @override
@@ -103,7 +104,7 @@ class TweetText extends StatelessWidget {
                   onUsernamePressed(mentionEntity.screenName);
                 } else if (entity.runtimeType == SymbolEntity) {
                   final SymbolEntity symbolEntity = entity as SymbolEntity;
-                  openUrl(symbolEntity.text);
+                  onSymbolPressed(symbolEntity.text);
                 } else if (entity.runtimeType == HashtagEntity) {
                   final HashtagEntity hashtagEntity = entity as HashtagEntity;
                   onHashtagPressed(hashtagEntity.text);

@@ -1,7 +1,7 @@
 /// Provides metadata and additional contextual information about content posted on Twitter
 abstract class Entity {
-  static const START_INDEX = 0;
-  static const int END_INDEX = 1;
+  static const int _kStartIndex = 0;
+  static const int _kEndIndex = 1;
 
   /// An array of integers indicating the offsets within the Tweet text where the Entity begins and ends.
   ///
@@ -38,10 +38,10 @@ abstract class Entity {
   });
 
   int get start {
-    return indices[START_INDEX];
+    return indices[_kStartIndex];
   }
 
   int get end {
-    return indices[END_INDEX];
+    return indices[_kEndIndex];
   }
 }

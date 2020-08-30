@@ -10,8 +10,8 @@ import 'package:tweet_ui/src/view_mode.dart';
 
 /// Widget that displays media resources from a Tweet
 class MediaContainer extends StatefulWidget {
-  static const double SQUARE_ASPECT_RATIO = 1.0;
-  static const double DEFAULT_ASPECT_RATIO_MEDIA_CONTAINER = 3.0 / 2.0;
+  static const double kSquareAspectRatio = 1.0;
+  static const double kDefaultAspectRatio = 3.0 / 2.0;
   final OnTapImage onTapImage;
 
   const MediaContainer(
@@ -93,14 +93,14 @@ class _MediaContainerState extends State<MediaContainer>
       switch (widget.tweetVM.getDisplayTweet().allPhotos.length) {
         case 1:
           child = AspectRatio(
-            aspectRatio: MediaContainer.DEFAULT_ASPECT_RATIO_MEDIA_CONTAINER,
+            aspectRatio: MediaContainer.kDefaultAspectRatio,
             child: _buildSinglePhoto(context,
                 widget.tweetVM.getDisplayTweet().allPhotos, 0, hashcode),
           );
           break;
         case 2:
           child = AspectRatio(
-            aspectRatio: MediaContainer.DEFAULT_ASPECT_RATIO_MEDIA_CONTAINER,
+            aspectRatio: MediaContainer.kDefaultAspectRatio,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -119,7 +119,7 @@ class _MediaContainerState extends State<MediaContainer>
           break;
         case 3:
           child = AspectRatio(
-            aspectRatio: MediaContainer.DEFAULT_ASPECT_RATIO_MEDIA_CONTAINER,
+            aspectRatio: MediaContainer.kDefaultAspectRatio,
             child: Row(
               children: <Widget>[
                 Expanded(
@@ -155,16 +155,16 @@ class _MediaContainerState extends State<MediaContainer>
         case 4:
           child = AspectRatio(
             aspectRatio: widget.viewMode == ViewMode.standard
-                ? MediaContainer.SQUARE_ASPECT_RATIO
-                : MediaContainer.DEFAULT_ASPECT_RATIO_MEDIA_CONTAINER,
+                ? MediaContainer.kSquareAspectRatio
+                : MediaContainer.kDefaultAspectRatio,
             child: GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               itemCount: 4,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: widget.viewMode == ViewMode.standard
-                    ? MediaContainer.SQUARE_ASPECT_RATIO
-                    : MediaContainer.DEFAULT_ASPECT_RATIO_MEDIA_CONTAINER,
+                    ? MediaContainer.kSquareAspectRatio
+                    : MediaContainer.kDefaultAspectRatio,
                 crossAxisSpacing: 1.0,
                 mainAxisSpacing: 1.0,
               ),

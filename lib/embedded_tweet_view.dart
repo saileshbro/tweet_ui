@@ -11,7 +11,6 @@ import 'package:tweet_ui/src/quote_tweet_view_embedded.dart';
 import 'package:tweet_ui/src/retweet.dart';
 import 'package:tweet_ui/src/tweet_text.dart';
 import 'package:tweet_ui/src/twitter_logo.dart';
-import 'package:tweet_ui/src/url_launcher.dart';
 import 'package:tweet_ui/src/view_mode.dart';
 
 class EmbeddedTweetView extends StatelessWidget {
@@ -40,8 +39,9 @@ class EmbeddedTweetView extends StatelessWidget {
   final Function(String username) onUsernamePressed;
   final Function(String hashtag) onHashtagPressed;
   final Function(String url) onUrlPressed;
+  final Function(String symbol) onSymbolPressed;
   final TextStyle tweetTextStyle;
-
+  final bool showOtherTweetsBanner;
   const EmbeddedTweetView(
     this._tweetVM, {
     this.backgroundColor,
@@ -54,7 +54,9 @@ class EmbeddedTweetView extends StatelessWidget {
     @required this.onUsernamePressed,
     @required this.onHashtagPressed,
     @required this.onUrlPressed,
+    @required this.onSymbolPressed,
     this.tweetTextStyle,
+    this.showOtherTweetsBanner = false,
   }); //  TweetView(this.tweetVM);
 
   EmbeddedTweetView.fromTweet(
@@ -69,7 +71,9 @@ class EmbeddedTweetView extends StatelessWidget {
     @required this.onUsernamePressed,
     @required this.onHashtagPressed,
     @required this.onUrlPressed,
+    @required this.onSymbolPressed,
     this.tweetTextStyle,
+    this.showOtherTweetsBanner = false,
   }) : _tweetVM = TweetVM.fromApiModel(tweet, createdDateDisplayFormat);
 
   @override
@@ -154,7 +158,7 @@ class EmbeddedTweetView extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      openUrl(_tweetVM.tweetLink);
+                      onTweetPressed(_tweetVM.tweetLink);
                     },
                     child: TweetText(
                       _tweetVM,
@@ -167,6 +171,7 @@ class EmbeddedTweetView extends StatelessWidget {
                       onHashtagPressed: onHashtagPressed,
                       onUrlPressed: onUrlPressed,
                       onUsernamePressed: onUsernamePressed,
+                      onSymbolPressed: onSymbolPressed,
                     ),
                   ),
                   if (_tweetVM.quotedTweet != null)
@@ -186,6 +191,7 @@ class EmbeddedTweetView extends StatelessWidget {
                         onTapImage: onTapImage,
                         onHashtagPressed: onHashtagPressed,
                         onUrlPressed: onUrlPressed,
+                        onSymblolPressed: onSymbolPressed,
                       ),
                     ),
                 ],
@@ -223,10 +229,11 @@ class EmbeddedTweetView extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                Icon(
-                  Icons.compare_arrows,
+                Image.asset(
+                  "assets/tw__ic_retweet_light.png",
+                  fit: BoxFit.fitWidth,
+                  package: 'tweet_ui',
                   color: darkMode ? Colors.grey[400] : Colors.grey[600],
-                  size: 18,
                 ),
                 Container(
                   margin: const EdgeInsets.only(left: 6),
@@ -246,44 +253,44 @@ class EmbeddedTweetView extends StatelessWidget {
               ],
             ),
           ),
-          Divider(
-            color: Colors.grey[400],
-          ),
-          Container(
-            margin:
-                const EdgeInsets.only(left: 20, right: 20, bottom: 15, top: 5),
-            child: GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              // onTap: () {
-              //   openUrl(_tweetVM.userLink);
-              // },
-              onTap: () => onUsernamePressed(_tweetVM.userScreenName),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.person_outline,
-                    color: darkMode ? Colors.blue[100] : Colors.blue[700],
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5),
-                      child: Text(
-                        "${_tweetVM.userName}'s other tweets",
-                        style: TextStyle(
-                            color:
-                                darkMode ? Colors.blue[100] : Colors.blue[800],
-                            fontWeight: FontWeight.w400),
-                        maxLines: 1,
-                        overflow: TextOverflow.fade,
-                        softWrap: false,
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                  )
-                ],
-              ),
+          if (showOtherTweetsBanner) ...[
+            Divider(
+              color: Colors.grey[400],
             ),
-          )
+            Container(
+              margin: const EdgeInsets.only(
+                  left: 20, right: 20, bottom: 15, top: 5),
+              child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () => onUsernamePressed(_tweetVM.userScreenName),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.person_outline,
+                      color: darkMode ? Colors.blue[100] : Colors.blue[700],
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: Text(
+                          "${_tweetVM.userName}'s other tweets",
+                          style: TextStyle(
+                              color: darkMode
+                                  ? Colors.blue[100]
+                                  : Colors.blue[800],
+                              fontWeight: FontWeight.w400),
+                          maxLines: 1,
+                          overflow: TextOverflow.fade,
+                          softWrap: false,
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
+          ]
         ],
       ),
     );
