@@ -61,23 +61,18 @@ class _MediaContainerState extends State<MediaContainer>
               fit: BoxFit.cover,
             ),
             Positioned.fill(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 4.0,
-                ),
-                child: widget.tweetVM.getDisplayTweet().hasGif
-                    ? Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Image.asset(
-                          "assets/tw__ic_gif_badge.png",
-                          fit: BoxFit.fitWidth,
-                          package: 'tweet_ui',
-                          height: 16,
-                          width: 16,
-                        ),
-                      )
-                    : Container(),
-              ),
+              child: widget.tweetVM.getDisplayTweet().hasGif
+                  ? Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Image.asset(
+                        "assets/tw__ic_gif_badge.png",
+                        fit: BoxFit.fitWidth,
+                        package: 'tweet_ui',
+                        height: 16,
+                        width: 16,
+                      ),
+                    )
+                  : Container(),
             ),
             Positioned.fill(
               child: Center(
@@ -204,7 +199,7 @@ class _MediaContainerState extends State<MediaContainer>
     } else {
       return Padding(
         padding: EdgeInsets.only(
-          top: widget.viewMode == ViewMode.compact ? 8.0 : 0.0,
+          top: widget.viewMode == ViewMode.compact ? 8.0 : 4.0,
           bottom: widget.viewMode != ViewMode.quote ? 8.0 : 0.0,
         ),
         child: ClipRRect(

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:html_unescape/html_unescape_small.dart';
@@ -13,7 +14,6 @@ class TweetText extends StatelessWidget {
   final TweetVM tweetVM;
   final TextStyle textStyle;
   final TextStyle clickableTextStyle;
-  final EdgeInsetsGeometry padding;
   final Function(String username) onUsernamePressed;
   final Function(String hashtag) onHashtagPressed;
   final Function(String url) onUrlPressed;
@@ -24,7 +24,6 @@ class TweetText extends StatelessWidget {
     Key key,
     this.textStyle,
     this.clickableTextStyle,
-    this.padding,
     @required this.onUsernamePressed,
     @required this.onHashtagPressed,
     @required this.onUrlPressed,
@@ -35,14 +34,13 @@ class TweetText extends StatelessWidget {
   Widget build(BuildContext context) {
     final spans = _getSpans(context);
     if (spans.isNotEmpty) {
-      return Padding(
-        padding: padding,
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          child: RichText(
-            text: TextSpan(children: spans),
-          ),
-        ),
+      return AutoSizeText.rich(
+        TextSpan(children: spans),
+        minFontSize: textStyle.fontSize,
+        stepGranularity: textStyle.fontSize,
+        maxFontSize: textStyle.fontSize,
+        maxLines: 12,
+        presetFontSizes: [textStyle.fontSize, clickableTextStyle.fontSize],
       );
     } else {
       return Container();

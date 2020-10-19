@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:tweet_ui/models/viewmodels/tweet_vm.dart';
 
@@ -36,13 +37,16 @@ class RetweetInformation extends StatelessWidget {
                       "assets/tw__ic_retweet_light.png",
                       fit: BoxFit.fitWidth,
                       package: 'tweet_ui',
+                      width: MediaQuery.of(context).size.width * 0.035,
                       color: retweetInformationStyle.color,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 6.0),
-                      child: Text(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: AutoSizeText(
                         "Retweeted by ${tweetVM.userName}",
                         style: retweetInformationStyle,
+                        minFontSize: retweetInformationStyle.fontSize,
+                        stepGranularity: retweetInformationStyle.fontSize,
                         textAlign: TextAlign.start,
                       ),
                     ),

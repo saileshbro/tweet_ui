@@ -3,6 +3,7 @@ import 'package:tweet_ui/models/viewmodels/tweet_vm.dart';
 import 'package:tweet_ui/on_tap_image.dart';
 import 'package:tweet_ui/src/byline.dart';
 import 'package:tweet_ui/src/media_container.dart';
+import 'package:tweet_ui/src/profile_image_embedded.dart';
 import 'package:tweet_ui/src/tweet_text.dart';
 import 'package:tweet_ui/src/view_mode.dart';
 
@@ -22,7 +23,7 @@ class QuoteTweetViewEmbed extends StatelessWidget {
   final Function(String hashtag) onHashtagPressed;
   final Function(String url) onUrlPressed;
   final Function(String tweetLink) onTweetPressed;
-  final Function(String symbol) onSymblolPressed;
+  final Function(String symbol) onSymbolPressed;
 
   const QuoteTweetViewEmbed(
     this.tweetVM, {
@@ -37,7 +38,7 @@ class QuoteTweetViewEmbed extends StatelessWidget {
     @required this.onUsernamePressed,
     @required this.onHashtagPressed,
     @required this.onUrlPressed,
-    @required this.onSymblolPressed,
+    @required this.onSymbolPressed,
   }); //  TweetView(this.tweetVM);
 
   const QuoteTweetViewEmbed.fromTweet(
@@ -53,7 +54,7 @@ class QuoteTweetViewEmbed extends StatelessWidget {
     @required this.onUsernamePressed,
     @required this.onHashtagPressed,
     @required this.onUrlPressed,
-    @required this.onSymblolPressed,
+    @required this.onSymbolPressed,
   });
 
   @override
@@ -65,6 +66,7 @@ class QuoteTweetViewEmbed extends StatelessWidget {
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         child: Container(
+          padding: EdgeInsets.all(0.02 * MediaQuery.of(context).size.width),
           decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: const BorderRadius.all(Radius.circular(8.0)),
@@ -76,30 +78,36 @@ class QuoteTweetViewEmbed extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: <Widget>[
-                    Byline(
-                      tweetVM,
-                      ViewMode.quote,
-                      onUsernamePressed: onUsernamePressed,
-                      userNameStyle: userNameStyle,
-                      userScreenNameStyle: userScreenNameStyle,
-                      showDate: false,
+              Row(
+                children: [
+                  ProfileImage(tweetVM: tweetVM),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: <Widget>[
+                          Byline(
+                            tweetVM,
+                            ViewMode.quote,
+                            onUsernamePressed: onUsernamePressed,
+                            userNameStyle: userNameStyle,
+                            userScreenNameStyle: userScreenNameStyle,
+                            showDate: false,
+                          ),
+                        ],
+                      ),
                     ),
-                    TweetText(
-                      tweetVM,
-                      textStyle: textStyle,
-                      clickableTextStyle: clickableTextStyle,
-                      padding: const EdgeInsets.symmetric(vertical: 15.0),
-                      onHashtagPressed: onHashtagPressed,
-                      onUrlPressed: onUrlPressed,
-                      onUsernamePressed: onUsernamePressed,
-                      onSymbolPressed: onSymblolPressed,
-                    ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
+              TweetText(
+                tweetVM,
+                textStyle: textStyle,
+                clickableTextStyle: clickableTextStyle,
+                onHashtagPressed: onHashtagPressed,
+                onUrlPressed: onUrlPressed,
+                onUsernamePressed: onUsernamePressed,
+                onSymbolPressed: onSymbolPressed,
               ),
               MediaContainer(
                 tweetVM,

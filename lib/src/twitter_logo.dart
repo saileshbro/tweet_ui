@@ -11,8 +11,8 @@ class TwitterLogo extends StatelessWidget {
       "assets/tw__ic_logo_blue.png",
       fit: BoxFit.fitWidth,
       package: 'tweet_ui',
-      height: 16,
-      width: 16,
+      height: MediaQuery.of(context).size.width * 0.045,
+      width: MediaQuery.of(context).size.width * 0.045,
     );
   }
 }

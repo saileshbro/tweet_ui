@@ -41,7 +41,11 @@ class EmbeddedTweetView extends StatelessWidget {
   final Function(String url) onUrlPressed;
   final Function(String symbol) onSymbolPressed;
   final TextStyle tweetTextStyle;
+  final TextStyle clickableTextStyle;
   final bool showOtherTweetsBanner;
+  final TextStyle userNameStyle;
+  final TextStyle userScreenNameStyle;
+  final TextStyle retweetInformationStyle;
 
   /// If true, it will show the likes, retweets and time it was created
   final bool showTweetInteractions;
@@ -61,6 +65,10 @@ class EmbeddedTweetView extends StatelessWidget {
     this.tweetTextStyle,
     this.showOtherTweetsBanner = false,
     this.showTweetInteractions = false,
+    this.userNameStyle,
+    this.userScreenNameStyle,
+    this.clickableTextStyle,
+    this.retweetInformationStyle,
   }); //  TweetView(this.tweetVM);
 
   EmbeddedTweetView.fromTweet(
@@ -79,6 +87,10 @@ class EmbeddedTweetView extends StatelessWidget {
     this.tweetTextStyle,
     this.showOtherTweetsBanner = false,
     this.showTweetInteractions = false,
+    this.userNameStyle,
+    this.userScreenNameStyle,
+    this.clickableTextStyle,
+    this.retweetInformationStyle,
   }) : _tweetVM = TweetVM.fromApiModel(tweet, createdDateDisplayFormat);
 
   @override
@@ -92,64 +104,53 @@ class EmbeddedTweetView extends StatelessWidget {
           GestureDetector(
             onTap: () => onTweetPressed(_tweetVM.tweetLink),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: () => onUsernamePressed(
-                        _tweetVM.getDisplayTweet().userScreenName),
-                    child: Stack(
-                      children: <Widget>[
-                        IntrinsicHeight(
-                          child: Column(
+                GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () => onUsernamePressed(
+                      _tweetVM.getDisplayTweet().userScreenName),
+                  child: Stack(
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          RetweetInformation(
+                            _tweetVM,
+                            retweetInformationStyle:
+                                defaultEmbeddedRetweetInformationStyle
+                                    .merge(retweetInformationStyle),
+                            onUsernamePressed: onUsernamePressed,
+                          ),
+                          const SizedBox(height: 6),
+                          Row(
                             children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.only(left: 28),
-                                child: RetweetInformation(
+                              ProfileImage(tweetVM: _tweetVM),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Byline(
                                   _tweetVM,
-                                  retweetInformationStyle:
-                                      defaultEmbeddedRetweetInformationStyle,
+                                  ViewMode.standard,
                                   onUsernamePressed: onUsernamePressed,
+                                  userNameStyle:
+                                      defaultUserNameStyle.merge(userNameStyle),
+                                  showDate: false,
+                                  userScreenNameStyle:
+                                      defaultEmbeddedUserNameStyle
+                                          .merge(userScreenNameStyle),
                                 ),
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  ProfileImage(tweetVM: _tweetVM),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Byline(
-                                        _tweetVM,
-                                        ViewMode.standard,
-                                        onUsernamePressed: onUsernamePressed,
-                                        userNameStyle: TextStyle(
-                                          color: darkMode
-                                              ? Colors.white
-                                              : Colors.black,
-                                          fontSize: 16.0,
-                                          fontFamily: 'Roboto',
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                        showDate: false,
-                                        userScreenNameStyle:
-                                            defaultEmbeddedUserNameStyle,
-                                      ),
-                                    ),
-                                  ),
-                                ],
                               ),
                             ],
                           ),
-                        ),
-                        const Align(
-                          alignment: Alignment.topRight,
-                          child: TwitterLogo(),
-                        )
-                      ],
-                    ),
+                        ],
+                      ),
+                      const Align(
+                        alignment: Alignment.topRight,
+                        child: TwitterLogo(),
+                      )
+                    ],
                   ),
                 ),
+                const SizedBox(height: 8),
                 GestureDetector(
                   onTap: () {
                     onTweetPressed(_tweetVM.tweetLink);
@@ -159,9 +160,8 @@ class EmbeddedTweetView extends StatelessWidget {
                     textStyle: darkMode
                         ? defaultEmbeddedDarkTextStyle.merge(tweetTextStyle)
                         : defaultEmbeddedTextStyle.merge(tweetTextStyle),
-                    clickableTextStyle: defaultEmbeddedClickableTextStyle,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 15.0),
+                    clickableTextStyle: defaultEmbeddedClickableTextStyle
+                        .merge(clickableTextStyle),
                     onHashtagPressed: onHashtagPressed,
                     onUrlPressed: onUrlPressed,
                     onUsernamePressed: onUsernamePressed,
@@ -170,36 +170,38 @@ class EmbeddedTweetView extends StatelessWidget {
                 ),
                 if (_tweetVM.quotedTweet != null)
                   Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0)
+                        .copyWith(top: 4),
                     child: QuoteTweetViewEmbed.fromTweet(
                       _tweetVM.quotedTweet,
-                      textStyle: TextStyle(
-                          color: darkMode ? Colors.white : Colors.black),
+                      textStyle: darkMode
+                          ? defaultEmbeddedDarkTextStyle.merge(tweetTextStyle)
+                          : defaultEmbeddedTextStyle.merge(tweetTextStyle),
                       onUsernamePressed: onUsernamePressed,
                       onTweetPressed: onTweetPressed,
-                      clickableTextStyle: defaultQuoteClickableTextStyle,
+                      clickableTextStyle: defaultQuoteClickableTextStyle
+                          .merge(clickableTextStyle),
                       userNameStyle: darkMode
                           ? defaultEmbeddedDarkQuoteUserNameStyle
-                          : defaultQuoteUserNameStyle,
-                      userScreenNameStyle: defaultQuoteUserScreenNameStyle,
+                              .merge(userNameStyle)
+                          : defaultQuoteUserNameStyle.merge(userNameStyle),
+                      userScreenNameStyle: defaultQuoteUserScreenNameStyle
+                          .merge(userScreenNameStyle),
                       onTapImage: onTapImage,
                       onHashtagPressed: onHashtagPressed,
                       onUrlPressed: onUrlPressed,
-                      onSymblolPressed: onSymbolPressed,
+                      onSymbolPressed: onSymbolPressed,
                     ),
                   ),
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(left: 10, right: 10),
-            child: MediaContainer(
-              _tweetVM,
-              ViewMode.standard,
-              useVideoPlayer: useVideoPlayer,
-              videoPlayerInitialVolume: videoPlayerInitialVolume,
-              onTapImage: onTapImage,
-            ),
+          MediaContainer(
+            _tweetVM,
+            ViewMode.standard,
+            useVideoPlayer: useVideoPlayer,
+            videoPlayerInitialVolume: videoPlayerInitialVolume,
+            onTapImage: onTapImage,
           ),
           if (showTweetInteractions)
             Container(

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:tweet_ui/models/viewmodels/tweet_vm.dart';
 import 'package:tweet_ui/src/twitter_logo.dart';
@@ -34,13 +35,15 @@ class Byline extends StatelessWidget {
             Row(
               children: <Widget>[
                 Flexible(
-                  child: Text(
+                  child: AutoSizeText(
                     tweetVM.getDisplayTweet().userName,
                     textAlign: TextAlign.start,
                     style: userNameStyle,
                     maxLines: 1,
                     overflow: TextOverflow.fade,
                     softWrap: false,
+                    minFontSize: userNameStyle.fontSize,
+                    stepGranularity: userNameStyle.fontSize,
                   ),
                 ),
                 Padding(
@@ -50,16 +53,22 @@ class Byline extends StatelessWidget {
               ],
             ),
             if (showDate == null || showDate == true)
-              Text(
+              AutoSizeText(
                 "@${tweetVM.getDisplayTweet().userScreenName} • ${tweetVM.getDisplayTweet().createdAt}",
                 textAlign: TextAlign.start,
                 style: userScreenNameStyle,
+                minFontSize: userScreenNameStyle.fontSize,
+                stepGranularity: userScreenNameStyle.fontSize,
+                maxLines: 1,
               )
             else
-              Text(
+              AutoSizeText(
                 "@${tweetVM.getDisplayTweet().userScreenName}",
                 textAlign: TextAlign.start,
                 style: userScreenNameStyle,
+                minFontSize: userScreenNameStyle.fontSize,
+                stepGranularity: userScreenNameStyle.fontSize,
+                maxLines: 1,
               ),
           ],
         );
@@ -72,18 +81,18 @@ class Byline extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                // onTap: () {
-                //   openUrl(tweetVM.getDisplayTweet().userLink);
-                // },
                 onTap: () =>
                     onUsernamePressed(tweetVM.getDisplayTweet().userScreenName),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Text(
+                    AutoSizeText(
                       tweetVM.getDisplayTweet().userName,
                       style: userNameStyle,
                       textAlign: TextAlign.start,
+                      minFontSize: userNameStyle.fontSize,
+                      stepGranularity: userNameStyle.fontSize,
+                      maxLines: 1,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 2.0),
@@ -93,9 +102,11 @@ class Byline extends StatelessWidget {
                     Flexible(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 4.0),
-                        child: Text(
+                        child: AutoSizeText(
                           "@${tweetVM.getDisplayTweet().userScreenName}",
                           style: userScreenNameStyle,
+                          minFontSize: userScreenNameStyle.fontSize,
+                          stepGranularity: userScreenNameStyle.fontSize,
                           maxLines: 1,
                           overflow: TextOverflow.fade,
                           softWrap: false,
@@ -107,11 +118,13 @@ class Byline extends StatelessWidget {
                       Flexible(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                          child: Text(
+                          child: AutoSizeText(
                             "• ${tweetVM.getDisplayTweet().createdAt}",
                             style: userScreenNameStyle,
                             maxLines: 1,
                             overflow: TextOverflow.fade,
+                            minFontSize: userScreenNameStyle.fontSize,
+                            stepGranularity: userScreenNameStyle.fontSize,
                             softWrap: false,
                             textAlign: TextAlign.start,
                           ),
