@@ -100,6 +100,7 @@ class EmbeddedTweetView extends StatelessWidget {
         color: backgroundColor,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           GestureDetector(
             onTap: () => onTweetPressed(_tweetVM.tweetLink),
@@ -205,22 +206,20 @@ class EmbeddedTweetView extends StatelessWidget {
           ),
           if (showTweetInteractions)
             Container(
-              margin:
-                  const EdgeInsets.only(top: 5, left: 20, right: 20, bottom: 5),
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
               child: Row(
                 children: <Widget>[
-                  Icon(
-                    Icons.favorite_border,
-                    color: darkMode ? Colors.grey[400] : Colors.grey[600],
-                    size: 18,
-                  ),
+                  Icon(Icons.favorite_border,
+                      color: darkMode ? Colors.grey[400] : Colors.grey[600],
+                      size: 0.045 * MediaQuery.of(context).size.width),
                   Container(
                     margin: const EdgeInsets.only(left: 6),
                     child: Text(
                       _tweetVM.favoriteCount.toString(),
                       style: TextStyle(
-                          color:
-                              darkMode ? Colors.grey[400] : Colors.grey[600]),
+                        color: darkMode ? Colors.grey[400] : Colors.grey[600],
+                        fontSize: 0.035 * MediaQuery.of(context).size.width,
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -230,6 +229,7 @@ class EmbeddedTweetView extends StatelessWidget {
                     "assets/tw__ic_retweet_light.png",
                     fit: BoxFit.fitWidth,
                     package: 'tweet_ui',
+                    width: 0.043 * MediaQuery.of(context).size.width,
                     color: darkMode ? Colors.grey[400] : Colors.grey[600],
                   ),
                   Container(
@@ -237,17 +237,21 @@ class EmbeddedTweetView extends StatelessWidget {
                     child: Text(
                       _tweetVM.retweetsCount.toString(),
                       style: TextStyle(
-                          color:
-                              darkMode ? Colors.grey[400] : Colors.grey[600]),
+                        color: darkMode ? Colors.grey[400] : Colors.grey[600],
+                        fontSize: 0.035 * MediaQuery.of(context).size.width,
+                      ),
                     ),
                   ),
                   Container(
-                      margin: const EdgeInsets.only(left: 16),
-                      child: Text(_tweetVM.createdAt,
-                          style: TextStyle(
-                              color: darkMode
-                                  ? Colors.grey[400]
-                                  : Colors.grey[600])))
+                    margin: const EdgeInsets.only(left: 16),
+                    child: Text(
+                      _tweetVM.createdAt,
+                      style: TextStyle(
+                        fontSize: 0.035 * MediaQuery.of(context).size.width,
+                        color: darkMode ? Colors.grey[400] : Colors.grey[600],
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
